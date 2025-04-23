@@ -1,21 +1,81 @@
+:root {
+    --sidebar-bg-color: #102542;
+    --sidebar-txt-color: #fff;
+
+    --sidebar-hover-highlight-color: #091424;
+
+    --form-bg-color: #fff;
+
+    --title-font: Merriweather, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --body-font: DMmono, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+    --border-colors: #102542;
+}
+
+* {
+    font-family: var(--body-font);
+}
+
 body {
     margin: 0;
     padding: 0;
     display: grid;
-    grid-template-columns: 1fr 5fr;
+    height: 100vh;
+    grid-template-columns: minmax(auto, 300px) 1fr;
 }
 
 .sidebar {
-    display: grid;
-    padding: 30px;
+    padding: 1rem;
+    background-color: var(--sidebar-bg-color);
+    color: var(--sidebar-txt-color);
+    font-size: large;
 }
 
-.projects {
-    display: grid;
+.projects-header {
+    font-family: var(--title-font);
+    padding: 0.4rem 0.75rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 0.25rem;
 }
 
+.projects-header:hover {
+    background-color: var(--sidebar-hover-highlight-color);
+}
 
-.todo-card {
+.sidebar button {
+    background-color: transparent;
+    border: none;
+    color: inherit;
+    font-size: inherit;
+}
+
+form {
+    height: 100px;
+    width: min(300px, 90%);
     display: grid;
-    padding: 20px;
+    grid-template-rows: fit-content;
+    align-items: center;
+    padding: 1rem;
+    border: solid 2px var(--border-colors);
+    border-radius: 1rem;
+    background-color: var(--form-bg-color);
+}
+
+form label {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1rem;
+}
+
+input[type="color"] {
+    flex-grow: 1;
+    border: none;
+    padding: 0;
+    outline: none;
+    background-color: transparent;
+    border-radius: 1rem;
+    height: 1rem;
 }
