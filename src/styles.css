@@ -1,12 +1,25 @@
-:root {
-    --sidebar-bg-color: #102542;
-    --sidebar-txt-color: #fff;
+@font-face {
+    font-family: Merriweather-sans;
+    src: url(fonts/Merriweather_Sans/MerriweatherSans-VariableFont_wght.ttf);
+}
 
-    --sidebar-hover-highlight-color: #091424;
+@font-face {
+    font-family: DMmono;
+    src: url(fonts/DM_Mono/DMMono-light.ttf);
+}
+
+:root {
+    --sidebar-bg-color: #CDD7D6;
+    --sidebar-txt-color: black;
+
+    --sidebar-hover-highlight-color: rgb(16 37 66 / 30%);
+    --active-project-bg-color: rgb(179 163 148 / 50%);
 
     --form-bg-color: #fff;
 
-    --title-font: Merriweather, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --btn-hover-color: #102542;
+
+    --title-font: Merriweather-sans, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     --body-font: DMmono, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 
     --border-colors: #102542;
@@ -19,40 +32,84 @@
 body {
     margin: 0;
     padding: 0;
+    
+}
+
+.content {
     display: grid;
     height: 100vh;
     grid-template-columns: minmax(auto, 300px) 1fr;
 }
 
-.sidebar {
+.content .unfocus {
+    opacity: 0.3;
+}
+
+.content > * {
     padding: 1rem;
+}
+
+.sidebar {
     background-color: var(--sidebar-bg-color);
     color: var(--sidebar-txt-color);
-    font-size: large;
+    font-size:medium;
+}
+
+.projects > * {
+    padding: 0.4rem 0.75rem;
 }
 
 .projects-header {
     font-family: var(--title-font);
-    padding: 0.4rem 0.75rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
     border-radius: 0.25rem;
 }
 
-.projects-header:hover {
+.projects-header[class="projects-header"]:hover,
+.project[class="project"]:hover {
     background-color: var(--sidebar-hover-highlight-color);
 }
 
-.sidebar button {
+.active {
+    background-color: var(--active-project-bg-color);
+}
+
+button {
     background-color: transparent;
     border: none;
     color: inherit;
     font-size: inherit;
 }
 
+.project-content > .header {
+    display: flex;
+    align-items: center;
+}
+
+.project-content > .header > :last-child {
+    margin-left: auto;
+    padding: 0.4rem 0.75rem;
+    border-radius: 0.3rem;
+}
+
+.project-content > .header > :last-child::before{
+    content: "+ ";
+    color: var(--btn-hover-color);
+}
+
+.project-content > .header > :last-child:hover {
+    color: var(--btn-hover-color);
+    background-color: var(--active-project-bg-color);
+}
+
+.project-todos {
+    display: grid;
+}
+
 form {
-    height: 100px;
+    height: 200px;
     width: min(300px, 90%);
     display: grid;
     grid-template-rows: fit-content;
@@ -61,6 +118,23 @@ form {
     border: solid 2px var(--border-colors);
     border-radius: 1rem;
     background-color: var(--form-bg-color);
+    position: absolute;
+    left: 40vw;
+    top: 30vh;
+
+    background-color: var(--sidebar-bg-color);
+}
+
+h2 {
+    padding: 0;
+    margin: 0;
+    font-family: var(--title-font);
+    font-size: large;
+    font-weight: lighter;
+}
+
+.hidden {
+    display: none;
 }
 
 form label {
@@ -78,4 +152,60 @@ input[type="color"] {
     background-color: transparent;
     border-radius: 1rem;
     height: 1rem;
+}
+
+.btns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.btns * {
+    flex-grow: 1;
+    padding: 0.2rem 0;
+}
+
+.projects-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 0.75rem;
+}
+
+.project {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 2rem;
+    gap: 1rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.3rem;
+}
+
+.project > :first-child {
+    border-radius: 50%;
+    flex-basis: 1rem;
+    height: 1rem;
+    flex-grow: 0;
+}
+
+.project > :nth-child(2) {
+    text-align: left;
+    padding: 0;
+    /* margin-top: -4px; */
+    background-color: transparent;
+    color: inherit;
+    border: none;
+    outline: none;
+    font-size: inherit;
+    flex-shrink: 1;
+    flex-grow: 1;
+}
+
+.project > :nth-child(3) {
+    margin-left: auto;
+    flex-basis: 1rem;
+    flex-grow: 0;
+    flex-shrink: 0
 }

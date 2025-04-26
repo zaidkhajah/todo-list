@@ -4,7 +4,7 @@ function generateTodoCardStructure(todo) {
     return {
         "tag": "article",
         "attributes": {
-          "className": "todo-card high-priority collapsed"
+          "className": `todo-card ${todo.priorityString} collapsed`
         },
         "children": [
           {

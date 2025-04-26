@@ -1,9 +1,11 @@
 
 class Project {
-    constructor(name = "untitled", creationDate = new Date()) {
+    constructor(name = "untitled", color = "#000000", creationDate = new Date()) {
         this.name = name;
         this.creationDate = creationDate;
+        this.color = color;
         this.todoList = [];
+        this.id = crypto.randomUUID();
     }
     add(todo) {
         this.todoList.push(todo);
