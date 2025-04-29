@@ -41,7 +41,7 @@ body {
     grid-template-columns: minmax(auto, 300px) 1fr;
 }
 
-.content .unfocus {
+.unfocus {
     opacity: 0.3;
 }
 
