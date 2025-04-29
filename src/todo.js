@@ -1,13 +1,12 @@
-const PRIORITY = {low : -1, medium : 0, high : 1};
+const PRIORITY = {low : -1, normal : 0, high : 1};
 const STATUS = {new : 0, overdue : -1, complete : 1};
-
 
 class Todo {
     constructor({
         title = "untitled", project = "general", description = "", dueDate = new Date(), 
-        reminderDate = new Date(), priority = PRIORITY.low, checklist={}
+        reminderDate = undefined, priority = PRIORITY.low, checklist=[]
     }) {
-        this.title = title;
+        this.title = title === "" ? "untitled" : title;
         this.project = project;
         this.description = description;
         this.dueDate = dueDate;
@@ -27,12 +26,18 @@ class Todo {
             case -1:
                 return "low-priority";
             case 0:
-                return "medium-priority";
+                return "normal-priority";
             case 1:
                 return"high-priority";
             default:
                 throw new Error("Unauthorized value");
         }
+    }
+
+    removeSelf() {
+        console.log(this.project.todoList);
+        this.project.remove(this);
+        console.log(this.project.todoList);
     }
 }
 

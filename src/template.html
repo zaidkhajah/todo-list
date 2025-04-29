@@ -30,43 +30,40 @@
         </div>
     </div>
 
-    <!-- <form action="" method="get" class="hidden" id="add-project-form">
+    <form action="" method="get" class="hidden" id="new-project-form">
         <h2>Add A New Project</h2>
-        <input type="text" name="name" value="untitled" placeholder="name">
+        <label>
+            <span>Title: </span>
+            <input type="text" name="name" value="untitled" placeholder="name">
+        </label>
         <label for="project-color">
-            <span>Color</span>
+            <span>Color: </span>
             <input type="color" name="project-color">
         </label>
         <div class="btns">
-            <button type="button">+Add The Project</button>
-            <button type="button">Cancel</button>
+            <button type="button" name="add-project">+Add The Project</button>
+            <button type="button" name="cancel-project-addition">Cancel</button>
         </div>
-    </form> -->
+    </form>
 
-    <form action="" method="get" class="hidden" id="add-todo-form">
+    <form action="" method="get" class="hidden" id="new-todo-form">
         <h2>Add a todo </h2>
         <input type="text" placeholder="Title" class="todo-input">
         <input type="text" placeholder="description" class="todo-input">
-        <label>
-            Due date: 
-            <input type="date" name="due-date" class="todo-input">
-        </label>
-        <label>
-            Reminder
-            <input type="date" name="reminder-date" class="todo-input">
-        </label>
-        <label>
-            Priority
-            <select name="priority" class="todo-input">
-                <option value="1">High</option>
-                <option value="0">Medium</option>
-                <option value="-1">Low</option>
-            </select>
-        </label>
+        <label for="due-date">Due Date:</label>
+        <input type="date" name="due-date" class="todo-input" id="due-date">
+        <label for="reminder-date">Reminder Date:</label>
+        <input type="date" name="reminder-date" class="todo-input" id="reminder-date">
+        <label for="priority">Priority</label>
+        <select name="priority" class="todo-input" id="priority">
+            <option value="1">High</option>
+            <option value="0">Normal</option>
+            <option value="-1">Low</option>
+        </select>
         <div class="btns">
             <button type="button">Create Task</button>
             <button type="button">Cancel</button>
-        </div>
+        </div> 
     </form>
 
 </body>

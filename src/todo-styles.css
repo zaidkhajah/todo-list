@@ -39,7 +39,7 @@
     gap: 0.5lh;
 } */
 
-
+/*
 .todo-card {
     overflow: hidden;
     display: grid;
@@ -49,7 +49,6 @@
     gap: 0.5lh;
     align-items: center;
 
-    width: 90vw;
     text-align: left;
     padding: 0.75rem;
     border: none;
@@ -67,7 +66,7 @@
 .todo-card.collapsed {
     height: 5lh;
     grid-template-rows: 1fr 1fr;
-    width: min(400px, 70vw);
+    width: 100%;
 }
 
 
@@ -176,6 +175,10 @@
     color: var(--xm-hover-color);
 }
 
+.todo-btns {
+    display: flex;
+}
+
 .minimize {
     transform: translateY(-0.75lh);
 }
@@ -196,3 +199,149 @@
 .due-date::before {
     content: "@";
 }
+
+*/
+
+.todo-card {
+    color: var(--todo-txt-color);
+    font-family: var(--todo-body-font);
+
+    background-color: var(--todo-bg-color);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    border-left: solid 0.5rem;
+
+    display: grid;
+    grid-template-columns: minmax(100px, 1fr) 10rem;
+    gap: 0.5rem;
+}
+
+.todo-card > :nth-child(n + 3) {
+    grid-column: 1 / -1;
+}
+
+.low-priority {
+    border-color: var(--todo-lp-accent);
+}
+
+.medium-priority {
+    border-color: var(--todo-mp-accent);
+}
+
+.high-priority {
+    border-color: var(--todo-hp-accent);
+}
+
+.todo-card > header {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 0.2lh;
+}
+
+.todo-card > header > :first-child {
+    font-family: var(--todo-title-font);
+}
+
+.collapsed :nth-child(n + 4) {
+    display: none;
+}
+
+.divider {
+    border-top: solid 1px var(--todo-txt-color);
+    opacity: 0.2;
+}
+
+
+.manage-todo {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+}
+
+.manage-todo > :hover {
+    color: var(--xm-hover-color);
+}
+
+.expand > :last-child{
+    display: none;
+}
+
+.minimize > :first-child{
+    display: none;
+}
+
+.minimize > :last-child {
+    transform: translateY(-7px);
+}
+
+.priority-toggle {
+    border: solid 1px var(--todo-bdr-color);
+    border-radius: 1rem;
+}
+
+.todo-card > header > * {
+    height: 1lh;
+    width: 100%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.todo-card > header > :first-child {
+    font-family: var(--todo-title-font);
+    font-size: 1rem;
+    font-weight:normal;
+}
+
+.todo-card > header > :last-child  {
+    opacity: 0.7;
+}
+
+.checklist {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+/* .manage-todo {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+}
+
+.manage-todo > :hover {
+    color: var(--xm-hover-color);
+}
+
+.expand, .minimize {
+    margin-left: auto ;
+}
+
+.expand *, .minimize * {
+    position: absolute;
+    top: 0;
+}
+
+.manage-todo [class="fa-solid fa-window-minimize"] {
+    top: -6px;
+}
+
+.priority-toggle {
+    margin-top: -3px;
+    margin-right: 1rem;
+}
+
+.delete-todo {
+    margin-top: -3px;
+}
+
+.expand :last-child {
+    display: none;
+}
+
+.minimize :first-child {
+    display: none;
+} */
+
+

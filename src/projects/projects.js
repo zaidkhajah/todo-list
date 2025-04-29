@@ -1,14 +1,24 @@
 
-import Project from "./project";
+class Project {
+    constructor(name = "untitled", color = "#000000", creationDate = new Date()) {
+        this.name = name;
+        this.creationDate = creationDate;
+        this.color = color;
+        this.todoList = [];
+        this.id = crypto.randomUUID();
+    }
+    add(todo) {
+        this.todoList.push(todo);
+    }
+    remove(todo) {
+        const index = this.todoList.findIndex(item => item.id === todo.id);
+        if (index === -1) return;
+        this.todoList.splice(index, 1);
+    }
+}
 
 const projects = [new Project("General")];
-const projectsList = document.querySelector(".projects-list");
-projectsList.append(createProjectHTMLElement(projects[0]));
-
-
-
-
-
+let activeProject = projects[0];
 
 function createProjectHTMLElement(project) {
     const [projectElement, projectName, projectColor, projectDelete] = [
@@ -32,9 +42,10 @@ function createProjectHTMLElement(project) {
     });
 
     projectElement.append(projectColor, projectName, projectDelete);
-    return projectElement
+    return projectElement;
 }
 
-console.log(projectsList);
+const setActiveProject = newActiveProject => activeProject = newActiveProject;
+const getActiveProject = () => activeProject;
 
-export {projects, projectsList, createProjectHTMLElement};
+export {Project, setActiveProject, getActiveProject, projects, createProjectHTMLElement};
