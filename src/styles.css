@@ -23,6 +23,8 @@
     --body-font: DMmono, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 
     --border-colors: #102542;
+
+    --delet-btn-hover-color: #F87060;
 }
 
 * {
@@ -211,4 +213,8 @@ input[type="color"] {
     flex-basis: 1rem;
     flex-grow: 0;
     flex-shrink: 0
+}
+
+.project > :last-child:hover {
+    color: var(--delet-btn-hover-color);
 }

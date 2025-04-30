@@ -1,3 +1,4 @@
+import { formatRFC3339 } from "date-fns";
 
 class Project {
     constructor(name = "untitled", color = "#000000", creationDate = new Date()) {
@@ -17,35 +18,40 @@ class Project {
     }
 }
 
-const projects = [new Project("General")];
-let activeProject = projects[0];
+const Projects = function() {
+    const list = [new Project("general")];
+    let activeProject = list[0];
 
-function createProjectHTMLElement(project) {
-    const [projectElement, projectName, projectColor, projectDelete] = [
-        document.createElement("div"),
-        document.createElement("span"),
-        document.createElement("input"),
-        document.createElement("button"),
-    ];
-    projectName.textContent = project.name;
-    projectColor.type = "color";
-    projectColor.value = project.color;
-    projectDelete.innerHTML = `<i class="fa-solid fa-trash"></i>`;
-    projectElement.classList.add("project");
-    projectElement.dataset.id = project.id;
+    const getList = () => list;
+    const add = project => list.push(project);
+    const remove = project => {
+        const index = findIndex(project);
+        if ((index === -1)) return;
+        list.splice(index, 1);
+    };
 
-    projectDelete.addEventListener("click", () => {
-        projectElement.remove();
-        const index = projects.findIndex( item => item.id === project.id);
-        projects.splice(index, 1);
-        console.log(projects);
-    });
+    function find(id) {
+        return list.find(projectItem => projectItem.id === id);
+    }
 
-    projectElement.append(projectColor, projectName, projectDelete);
-    return projectElement;
+    function findIndex(project) {
+        return list.findIndex(projectItem => projectItem.id === project);
+    }
+
+    const getActiveProject = () => activeProject;
+    function setActiveProject({project = undefined, id = undefined}) {
+        if (project) {
+            activeProject = project;
+            return;
+        }
+        activeProject = find(id);
+    }
+
+    const forEach = callback => list.forEach(callback);
+    const includes = project => list.includes(project);
+
+    return {getList, add, remove, find, findIndex,
+        getActiveProject, setActiveProject, forEach, includes};
 }
 
-const setActiveProject = newActiveProject => activeProject = newActiveProject;
-const getActiveProject = () => activeProject;
-
-export {Project, setActiveProject, getActiveProject, projects, createProjectHTMLElement};
+export {Project, Projects};
