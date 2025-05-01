@@ -24,6 +24,7 @@ const Projects = function() {
 
     const getList = () => list;
     const add = project => list.push(project);
+
     const remove = project => {
         const index = findIndex(project);
         if ((index === -1)) return;
@@ -35,7 +36,7 @@ const Projects = function() {
     }
 
     function findIndex(project) {
-        return list.findIndex(projectItem => projectItem.id === project);
+        return list.findIndex(projectItem => projectItem.id === project.id);
     }
 
     const getActiveProject = () => activeProject;

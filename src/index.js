@@ -185,6 +185,11 @@ function createProjectHTMLElement(project) {
         }
         projectElement.remove();
         projects.remove(project);
+        
+        if (activeProjectElement === projectElement) {
+            clearProjectContent();
+            setProjectHeaderElementActive();
+        }
     });
     projectElement.append(projectColor, projectName, projectDelete);
     return projectElement;

@@ -5,7 +5,7 @@ function createTodoCardFactory(todo = undefined) {
     const get = () => todo;
     const set = newTodo => todo = newTodo;
 
-    const TodoCardClassName = () => `todo-card ${todo.priorityString} collapsed`;
+    const TodoCardClassName = (collapsed=true) => `todo-card ${todo.priorityString} ${collapsed ? "collapsed" : ""}`;
 
     const createHeader = () => {
         const header = document.createElement("header");
@@ -41,7 +41,7 @@ function createTodoCardFactory(todo = undefined) {
             if (target === priorityToggle) {
                 todo.set("priority", todo.priority === -1 ? 0 : (todo.priority === 0 ? 1 : -1));
                 priorityToggle.textContent = todo.priorityString.split("-")[0];
-                card.className = TodoCardClassName();
+                card.className = TodoCardClassName(Array.from(card.classList).includes("collapsed"));
             }
             if (target === deleteButton) {
                 card.remove();
@@ -68,19 +68,52 @@ function createTodoCardFactory(todo = undefined) {
     };
 
     const createChecklist = () => {
-        let label;
-        let span;
+        let checklistItem;
         let inputElement;
+        let textInput;
 
         const checklistContainer = document.createElement("div");
-        todo.checklist.forEach(item => {
-            label = document.createElement("label");
-            span = document.createElement("span");
-            span.textContent = item;
+        checklistContainer.className = "checklist";
+        const addChecklistitem = document.createElement("button");
+        addChecklistitem.textContent = "Add Checklist Item";
+        checklistContainer.appendChild(addChecklistitem);
+
+        addChecklistitem.addEventListener("click", () => {
+            checklistItem = document.createElement("div");
+            textInput = document.createElement("input");
+            textInput.type = "text";
+            textInput.value = "";
+
             inputElement = document.createElement("input");
             inputElement.type = "checkbox";
-            label.append(inputElement, span);
-            checklistContainer.append(label);
+            
+            const checkListItem = todo.addCheckListItem("", false);
+
+            textInput.addEventListener("input", () => {
+                todo.updateCheckListItem(textInput.value, inputElement.checked, checkListItem);
+            })
+
+            inputElement.addEventListener("input", () => {
+                todo.updateCheckListItem(textInput.value, inputElement.checked, checkListItem);
+            })
+
+
+            checklistItem.append(inputElement, textInput);
+            checklistContainer.append(checklistItem);
+        })
+
+        todo.checklist.forEach(item => {
+            checklistItem = document.createElement("div");
+
+            textInput = document.createElement("input");
+            textInput.value = item.text;
+
+            inputElement = document.createElement("input");
+            inputElement.type = "checkbox";
+            inputElement.checked = item.status;
+
+            checklistItem.append(inputElement, textInput);
+            checklistContainer.append(checklistItem);
         });
         return checklistContainer;
     }

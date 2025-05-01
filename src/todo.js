@@ -1,6 +1,24 @@
 const PRIORITY = {low : -1, normal : 0, high : 1};
 const STATUS = {new : 0, overdue : -1, complete : 1};
 
+class ChecklistItem {
+    constructor(text="", status=false) {
+        this.text = text;
+        this.status = status;
+        this._id = crypto.randomUUID();
+    }
+    updateText(text) {
+        this.text = text;
+    }
+    updateStatus(status) {
+        this.status = status;
+    }
+
+    get id() {
+        return this._id;
+    }
+}
+
 class Todo {
     constructor({
         title = "untitled", project = "general", description = "", dueDate = new Date(), 
@@ -38,6 +56,19 @@ class Todo {
         console.log(this.project.todoList);
         this.project.remove(this);
         console.log(this.project.todoList);
+    }
+
+    addCheckListItem(text, status) {
+        const newItem = new ChecklistItem(text, status);
+        this.checklist.push(newItem);
+        return newItem;
+    }
+
+    updateCheckListItem(text, status, checkListItem) {
+        const index = this.checklist.findIndex(item => item.id === checkListItem.id);
+        console.log(index, text, status, checkListItem.id);
+        this.checklist[index].updateText(text);
+        this.checklist[index].updateStatus(status);
     }
 }
 
