@@ -68,18 +68,18 @@ function createTodoCardFactory(todo = undefined) {
     };
 
     const createChecklist = () => {
-        let checklistItem;
+        let checkListElement;
         let inputElement;
         let textInput;
 
         const checklistContainer = document.createElement("div");
         checklistContainer.className = "checklist";
         const addChecklistitem = document.createElement("button");
-        addChecklistitem.textContent = "Add Checklist Item";
+        addChecklistitem.textContent = "+Add Checklist Item";
         checklistContainer.appendChild(addChecklistitem);
 
         addChecklistitem.addEventListener("click", () => {
-            checklistItem = document.createElement("div");
+            checkListElement = document.createElement("div");
             textInput = document.createElement("input");
             textInput.type = "text";
             textInput.value = "";
@@ -89,31 +89,39 @@ function createTodoCardFactory(todo = undefined) {
             
             const checkListItem = todo.addCheckListItem("", false);
 
-            textInput.addEventListener("input", () => {
-                todo.updateCheckListItem(textInput.value, inputElement.checked, checkListItem);
-            })
+            textInput.addEventListener("input", function() {
+                todo.updateCheckListItem(this.value, this.previousElementSibling.checked, checkListItem);
+            });
 
-            inputElement.addEventListener("input", () => {
-                todo.updateCheckListItem(textInput.value, inputElement.checked, checkListItem);
-            })
+            inputElement.addEventListener("input", function() {
+                todo.updateCheckListItem(this.nextElementSibling.value, this.checked, checkListItem);
+            });
 
 
-            checklistItem.append(inputElement, textInput);
-            checklistContainer.append(checklistItem);
+            checkListElement.append(inputElement, textInput);
+            checklistContainer.append(checkListElement);
         })
 
-        todo.checklist.forEach(item => {
-            checklistItem = document.createElement("div");
+        todo.checklist.forEach(checkListItem => {
+            checkListElement = document.createElement("div");
 
             textInput = document.createElement("input");
-            textInput.value = item.text;
+            textInput.type = "text";
+            textInput.value = checkListItem.text;
 
             inputElement = document.createElement("input");
             inputElement.type = "checkbox";
-            inputElement.checked = item.status;
+            inputElement.checked = checkListItem.status;
+            checkListElement.append(inputElement, textInput);
 
-            checklistItem.append(inputElement, textInput);
-            checklistContainer.append(checklistItem);
+            textInput.addEventListener("input", function() {
+                todo.updateCheckListItem(this.value, this.previousElementSibling.checked, checkListItem);
+            });
+
+            inputElement.addEventListener("input", function() {
+                todo.updateCheckListItem(this.nextElementSibling.value, this.checked, checkListItem);
+            });
+            checklistContainer.append(checkListElement);
         });
         return checklistContainer;
     }

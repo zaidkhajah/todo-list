@@ -66,7 +66,7 @@ class Todo {
 
     updateCheckListItem(text, status, checkListItem) {
         const index = this.checklist.findIndex(item => item.id === checkListItem.id);
-        console.log(index, text, status, checkListItem.id);
+        console.log(index);
         this.checklist[index].updateText(text);
         this.checklist[index].updateStatus(status);
     }

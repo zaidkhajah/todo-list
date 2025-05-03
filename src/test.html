@@ -1,4 +1,4 @@
-<!-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -6,27 +6,50 @@
     <title>Document</title>
 </head>
 <body>
-    <input placeholder="Enter some text" name="name" />
-    <p id="values"></p>
-
-    <input type="checkbox" id="checkbox">
-    <p id="checkbox-value"></p>
-
-
-    <script>
-        const input = document.querySelector("input");
-        const log = document.getElementById("values");
-
-        const checkbox = document.getElementById("checkbox");
-        const logCheck = document.getElementById("checkbox-value");
-
-        input.addEventListener("input", updateValue);
-
-        checkbox.addEventListener("input", () => logCheck.textContent = checkbox.checked);
-
-        function updateValue(e) {
-        log.textContent = e.target.value;
+    <div class="container">
+        <div class="left"></div>
+        <div class="right"></div>
+        <div class="curved">
+            <div class="circle"></div>
+        </div>
+        <div class="bottom"></div>
+      </div>
+      
+      
+      <style>
+        *{
+          margin:0;
         }
-    </script>
+      .container {
+        margin: 20px;
+        display: grid;
+        grid-template-columns: 50px 260px 50px;
+        grid-template-rows: 50px 260px 50px;
+      }
+      .left {
+        background-color: #F4DA64;
+        grid-column: 1 / 2;
+        grid-row: 1 / 2;
+      }
+
+      .right {
+        background-color: #F4DA64;
+        grid-column: 3 / -1;
+        grid-row: 1 / 2;
+      }
+
+      .curved {
+        background-color: #F4DA64;
+        grid-column: 2/3;
+        grid-row: 2/3;
+      }
+
+      .circle {
+        border-radius: 50%;
+        width: 50%;
+        height: 50%;
+        background-color: #3F4869;
+      }
+      </style>
 </body>
-</html> -->
+</html>
