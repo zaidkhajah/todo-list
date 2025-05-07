@@ -2,7 +2,8 @@ import "./styles.css"
 import "./todo-styles.css"
 
 import { format, add } from "date-fns";
-import { Project, Projects } from "./projects/projects.js";
+import Project from "./projects/project.js";
+import Projects from "./projects/projects.js";
 import todoCardFactory from "./todo-card-factory.js";
 import Todo from "./todo.js";
 
@@ -21,7 +22,6 @@ const newTodoForm = document.getElementById("new-todo-form");
 setProjectHeaderElementActive();
 
 projectsDiv.addEventListener("click", projectsDivEventHandler);
-
 projectContent.firstElementChild.addEventListener("click", event => {
     if (event.target.closest(".add-task")) {
         showAddTaskForm();
@@ -185,7 +185,7 @@ function createProjectHTMLElement(project) {
         }
         projectElement.remove();
         projects.remove(project);
-        
+
         if (activeProjectElement === projectElement) {
             clearProjectContent();
             setProjectHeaderElementActive();

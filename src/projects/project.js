@@ -1,20 +1,38 @@
 
-class Project {
-    constructor(name = "untitled", color = "#000000", creationDate = new Date()) {
-        this.name = name;
-        this.creationDate = creationDate;
-        this.color = color;
-        this.todoList = [];
-        this.id = crypto.randomUUID();
+
+function Project({ name=undefined , color=undefined, json = null, creationDate = new Date() }) {
+    const state = {};
+    
+    init();
+
+    const getName = () => state.name;
+    const getColor = () => state.color;
+
+    const setName = name => state.name = name;
+    const setColor = color => state.color = color;
+
+    const getItems = () => state.todoItems;
+    const getId = () => state.id;
+
+
+    const add = todo => state.todoItems.push(todo);
+    const remove = todo => {
+        const index = state.todoItems.findIndex(item => item.getId() === todo.getId());
+        if (!(index === -1)) return state.todoItems.splice(index, 1);
     }
-    add(todo) {
-        this.todoList.push(todo);
+
+    const createJSON = () => {
+        return JSON.stringify(state);
     }
-    remove(todo) {
-        const index = this.todoList.findIndex(item => item.id === todo.id);
-        if (index === -1) return;
-        this.todoList.splice(index, 1);
+
+    function init() {
+        if (json) Object.assign(state, JSON.parse(json));
+        else Object.assign(state, {
+            name, color, creationDate, todoItems : [], id : crypto.randomUUID()
+        });
     }
+
+    return {getName, getColor, getItems, getId, add, remove, createJSON};
 }
 
 export default Project;
