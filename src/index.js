@@ -4,7 +4,7 @@ import "./todo-styles.css"
 import { format, add } from "date-fns";
 import Project from "./projects/project.js";
 import Projects from "./projects/projects.js";
-import todoCardFactory from "./todo-card-factory.js";
+import todoCardFactory from "./todo/todo-card-factory.js";
 import Todo from "./todo.js";
 
 const projects = new Projects();

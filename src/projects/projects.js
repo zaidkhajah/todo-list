@@ -10,36 +10,26 @@ function Projects(json=null) {
     const getList = () => list;
     const forEach = callback => list.forEach(callback);
     const includes = project => list.includes(project);
+    const getProject = id => list.find(project => project.id === id);
 
     const add = project => {
         list.push(project);
-        activeProject = project;
+        return list.at(-1);
     };
 
-    const remove = project => {
-        const index = list.findIndex(item => project.getId() === item.getId());
-        if (!(index === -1)) {
-            list.splice(index, 1);
-            if (activeProject.getId() === project.getId()) {
-                list.length >= 1 ? activeProject = list[0] : activeProject = undefined;
-            }
-        }
-        throw new Error("This project is not in the projects list.");
+    const remove = id => {
+        const index = list.findIndex(project => project.getId() === id);
+        if (index === -1) throw new Error("the provided id does not match any project id.");;
+        return list.splice(index, 1);
     };
 
-    const getActiveProject = () => activeProject;
-    
-    function setActiveProject(project=undefined, id=undefined) {
-        if (project) return (activeProject = project);
-        if (id) return (activeProject = list.find(item => item.getId() === id));
-        throw new Error("Neither the project nor the id are defined.");
-    }
-
-    const createJSON = () => JSON.stringify(list);
+    const toJSON = () => list;
 
     function init() {
         if (json) {
-            Object.assign(list, JSON.parse(json));
+            Object.assign(list, JSON.parse(json, function(key, value) {
+                value.map(json => Project({json}));
+            }));
         }
         else {
             list = [Project(INITIAL_PROJECT)];
@@ -47,7 +37,7 @@ function Projects(json=null) {
         activeProject = list[0];
     }
 
-    return {getList, add, remove, getActiveProject, setActiveProject, forEach, includes, createJSON};
+    return {getList, add, remove, forEach, getProject, includes, toJSON};
 }
 
 export default Projects;
